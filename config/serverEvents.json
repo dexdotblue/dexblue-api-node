@@ -172,6 +172,10 @@
                     ]
                 }
             },
+            "market" : {
+                "type"     : "string",
+                "optional" : true
+            },
             "from" : {
                 "type"     : "uint",
                 "optional" : true
@@ -609,7 +613,7 @@
                         "type" : "string"
                     }
                 ]
-            },,
+            },
             "from" : {
                 "type"     : "uint",
                 "optional" : true
@@ -729,11 +733,456 @@
             }
         ]
     },
-    "activeOrderSnapshot"
-    "historicalOrders"
-    "orderStatus"
-    "userTrades"
-    "userTrade"
-    "signedWithdrawal"
-    "feeTier"
+    "activeOrderSnapshot" : {
+        "type" : "array",
+        "elements" : {
+            "type"   : "array",
+            "fields" : [
+                {
+                    "name" : "id",
+                    "type" : "uint"
+                },
+                {
+                    "name" : "cid",
+                    "type" : "uint"
+                },
+                {
+                    "name" : "hash",
+                    "type" : "hexString"
+                },
+                {
+                    "name" : "market",
+                    "type" : "string"
+                },
+                {
+                    "name" : "active",
+                    "type" : "bool"
+                },
+                {
+                    "name" : "canceled",
+                    "type" : "bool"
+                },
+                {
+                    "name" : "sellToken",
+                    "type" : "string"
+                },
+                {
+                    "name" : "buyToken",
+                    "type" : "string"
+                },
+                {
+                    "name" : "sellTokenAmount",
+                    "type" : "uintString"
+                },
+                {
+                    "name" : "buyTokenAmount",
+                    "type" : "uintString"
+                },
+                {
+                    "name" : "sellTokenRemaining",
+                    "type" : "uintString"
+                },
+                {
+                    "name" : "buyTokenRemaining",
+                    "type" : "uintString"
+                },
+                {
+                    "name" : "sellTokenBookAmount",
+                    "type" : "uintString"
+                },
+                {
+                    "name" : "buyTokenBookAmount",
+                    "type" : "uintString"
+                },
+                {
+                    "name" : "bookRate",
+                    "type" : "floatString"
+                },
+                {
+                    "name" : "peggedCurrency",
+                    "type" : "string"
+                },
+                {
+                    "name" : "peggedRate",
+                    "type" : "floatString"
+                },
+                {
+                    "name" : "hidden",
+                    "type" : "bool"
+                },
+                {
+                    "name" : "trades",
+                    "type" : "array",
+                    "elements" : {
+                        "type" : "uint"
+                    }
+                },
+                {
+                    "name" : "info",
+                    "type" : "string"
+                },
+                {
+                    "name" : "nonce",
+                    "type" : "uint"
+                },
+                {
+                    "name" : "timestamp",
+                    "type" : "uint"
+                },
+                {
+                    "name" : "LastActive",
+                    "type" : "uint"
+                }
+            ]
+        }
+    },
+    "historicalOrders" : {
+        "type" : "object",
+        "keys" : {
+            "orders" : {
+                "type"     : "array",
+                "elements" : {
+                    "type"   : "array",
+                    "fields" : [
+                        {
+                            "name" : "id",
+                            "type" : "uint"
+                        },
+                        {
+                            "name" : "cid",
+                            "type" : "uint"
+                        },
+                        {
+                            "name" : "hash",
+                            "type" : "hexString"
+                        },
+                        {
+                            "name" : "market",
+                            "type" : "string"
+                        },
+                        {
+                            "name" : "active",
+                            "type" : "bool"
+                        },
+                        {
+                            "name" : "canceled",
+                            "type" : "bool"
+                        },
+                        {
+                            "name" : "sellToken",
+                            "type" : "string"
+                        },
+                        {
+                            "name" : "buyToken",
+                            "type" : "string"
+                        },
+                        {
+                            "name" : "sellTokenAmount",
+                            "type" : "uintString"
+                        },
+                        {
+                            "name" : "buyTokenAmount",
+                            "type" : "uintString"
+                        },
+                        {
+                            "name" : "sellTokenRemaining",
+                            "type" : "uintString"
+                        },
+                        {
+                            "name" : "buyTokenRemaining",
+                            "type" : "uintString"
+                        },
+                        {
+                            "name" : "sellTokenBookAmount",
+                            "type" : "uintString"
+                        },
+                        {
+                            "name" : "buyTokenBookAmount",
+                            "type" : "uintString"
+                        },
+                        {
+                            "name" : "bookRate",
+                            "type" : "floatString"
+                        },
+                        {
+                            "name" : "peggedCurrency",
+                            "type" : "string"
+                        },
+                        {
+                            "name" : "peggedRate",
+                            "type" : "floatString"
+                        },
+                        {
+                            "name" : "hidden",
+                            "type" : "bool"
+                        },
+                        {
+                            "name" : "trades",
+                            "type" : "array",
+                            "elements" : {
+                                "type" : "uint"
+                            }
+                        },
+                        {
+                            "name" : "info",
+                            "type" : "string"
+                        },
+                        {
+                            "name" : "nonce",
+                            "type" : "uint"
+                        },
+                        {
+                            "name" : "timestamp",
+                            "type" : "uint"
+                        },
+                        {
+                            "name" : "LastActive",
+                            "type" : "uint"
+                        }
+                    ]
+                }
+            },
+            "market" : {
+                "type"     : "string",
+                "optional" : true
+            },
+            "from" : {
+                "type"     : "uint",
+                "optional" : true
+            },
+            "to" : {
+                "type"     : "uint",
+                "optional" : true
+            },
+            "before" : {
+                "type"     : "uint",
+                "optional" : true
+            },
+            "limit" : {
+                "type"     : "uint",
+                "optional" : true
+            }
+        }
+    },
+    "orderStatus" : {
+        "type"   : "array",
+        "fields" : [
+            {
+                "name" : "id",
+                "type" : "uint"
+            },
+            {
+                "name" : "cid",
+                "type" : "uint"
+            },
+            {
+                "name" : "hash",
+                "type" : "hexString"
+            },
+            {
+                "name" : "market",
+                "type" : "string"
+            },
+            {
+                "name" : "active",
+                "type" : "bool"
+            },
+            {
+                "name" : "canceled",
+                "type" : "bool"
+            },
+            {
+                "name" : "sellToken",
+                "type" : "string"
+            },
+            {
+                "name" : "buyToken",
+                "type" : "string"
+            },
+            {
+                "name" : "sellTokenAmount",
+                "type" : "uintString"
+            },
+            {
+                "name" : "buyTokenAmount",
+                "type" : "uintString"
+            },
+            {
+                "name" : "sellTokenRemaining",
+                "type" : "uintString"
+            },
+            {
+                "name" : "buyTokenRemaining",
+                "type" : "uintString"
+            },
+            {
+                "name" : "sellTokenBookAmount",
+                "type" : "uintString"
+            },
+            {
+                "name" : "buyTokenBookAmount",
+                "type" : "uintString"
+            },
+            {
+                "name" : "bookRate",
+                "type" : "floatString"
+            },
+            {
+                "name" : "peggedCurrency",
+                "type" : "string"
+            },
+            {
+                "name" : "peggedRate",
+                "type" : "floatString"
+            },
+            {
+                "name" : "hidden",
+                "type" : "bool"
+            },
+            {
+                "name" : "trades",
+                "type" : "array",
+                "elements" : {
+                    "type" : "uint"
+                }
+            },
+            {
+                "name" : "info",
+                "type" : "string"
+            },
+            {
+                "name" : "nonce",
+                "type" : "uint"
+            },
+            {
+                "name" : "timestamp",
+                "type" : "uint"
+            },
+            {
+                "name" : "LastActive",
+                "type" : "uint"
+            }
+        ]
+    },
+    "userTrades" : {
+        "type" : "object",
+        "keys" : {
+            "trades" : {
+                "type" : "array",
+                "fields" : [
+                    {
+                        "name" : "id",
+                        "type" : "uint"
+                    },
+                    {
+                        "name" : "market",
+                        "type" : "string"
+                    },
+                    {
+                        "name" : "direction",
+                        "type" : "binbool"
+                    },
+                    {
+                        "name" : "rate",
+                        "type" : "floatString"
+                    },
+                    {
+                        "name" : "amount",
+                        "type" : "uintString"
+                    },
+                    {
+                        "name" : "timestamp",
+                        "type" : "uint"
+                    },
+                    {
+                        "name" : "orderId",
+                        "type" : "uint"
+                    },
+                    {
+                        "name" : "orderCid",
+                        "type" : "uint"
+                    }
+                ]
+            }
+        }
+    },
+    "userTrade" : {
+        "type" : "array",
+        "fields" : [
+            {
+                "name" : "id",
+                "type" : "uint"
+            },
+            {
+                "name" : "market",
+                "type" : "string"
+            },
+            {
+                "name" : "direction",
+                "type" : "binbool"
+            },
+            {
+                "name" : "rate",
+                "type" : "floatString"
+            },
+            {
+                "name" : "amount",
+                "type" : "uintString"
+            },
+            {
+                "name" : "timestamp",
+                "type" : "uint"
+            },
+            {
+                "name" : "orderId",
+                "type" : "uint"
+            },
+            {
+                "name" : "orderCid",
+                "type" : "uint"
+            }
+        ]
+    },
+    "signedWithdrawal" : {
+        "type" : "object",
+        "keys" : {
+            "sig" : {
+                "type" : "object",
+                "keys" : {
+                    "v" : {
+                        "type" : "uint"
+                    },
+                    "r" : {
+                        "type" : "hexString"
+                    },
+                    "s" : {
+                        "type" : "hexString"
+                    },
+                    "nonce" : {
+                        "type" : "uint"
+                    }
+                }
+            },
+            "id" : {
+                "type" : "uint"
+            }
+        }
+    },
+    "feeTier" : {
+        "type"   : "array",
+        "fields" : [
+            {
+                "name" : "volume30d",
+                "type" : "float"
+            },
+            {
+                "name" : "makerFee",
+                "type" : "float"
+            },
+            {
+                "name" : "takerFee",
+                "type" : "float"
+            }
+        ]
+    }
 }
