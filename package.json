@@ -19,5 +19,8 @@
     "tokens"
   ],
   "author": "dex.blue",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "web3": "^1.0.0-beta.52"
+  }
 }
