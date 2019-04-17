@@ -272,15 +272,463 @@
             }
         }
     },
-    "rate"
-    "auth"
-    "balanceSnapshot"
-    "balanceStatus"
-    "delegateSnapshot"
-    "delegateStatus"
-    "pendingLedgerEntrySnapshot"
-    "historicalLedgerEntries"
-    "ledgerEntryStatus"
+    "rate" : {
+        "type" : "float"
+    },
+    "auth" : {
+        "type" : "array",
+        "fields" : [
+            {
+                "name" : "status",
+                "type" : "string"
+            },
+            {
+                "name" : "address",
+                "type" : "hexString"
+            },
+            {
+                "name" : "session",
+                "type" : "string"
+            },
+            {
+                "name" : "delegate",
+                "type" : "hexString"
+            }
+        ]
+    },
+    "balanceSnapshot" : {
+        "type" : "array",
+        "elements" : {
+            "type"   : "array",
+            "fields" : [
+                {
+                    "name" : "token",
+                    "type" : "string"
+                },
+                {
+                    "name" : "settled",
+                    "type" : "uintString"
+                },
+                {
+                    "name" : "available",
+                    "type" : "uintString"
+                },
+                {
+                    "name" : "blocked",
+                    "type" : "uintString"
+                }
+            ]
+        }
+    },
+    "balanceStatus" : {
+        "type"   : "array",
+        "fields" : [
+            {
+                "name" : "token",
+                "type" : "string"
+            },
+            {
+                "name" : "settled",
+                "type" : "uintString"
+            },
+            {
+                "name" : "available",
+                "type" : "uintString"
+            },
+            {
+                "name" : "blocked",
+                "type" : "uintString"
+            }
+        ]
+    },
+    "delegateSnapshot" : {
+        "type" : "array",
+        "elements" : {
+            "type"   : "array",
+            "fields" : [
+                {
+                    "name" : "address",
+                    "type" : "hexString"
+                },
+                {
+                    "name" : "active",
+                    "type" : "bool"
+                },
+                {
+                    "name" : "accepted",
+                    "type" : "bool"
+                },
+                {
+                    "name" : "removalSignature",
+                    "type" : "hexString"
+                },
+                {
+                    "name" : "label",
+                    "type" : "string"
+                },
+                {
+                    "name" : "isTradingLogin",
+                    "type" : "bool"
+                }
+            ]
+        }
+    },
+    "delegateStatus" : {
+        "type"   : "array",
+        "fields" : [
+            {
+                "name" : "address",
+                "type" : "hexString"
+            },
+            {
+                "name" : "active",
+                "type" : "bool"
+            },
+            {
+                "name" : "accepted",
+                "type" : "bool"
+            },
+            {
+                "name" : "removalSignature",
+                "type" : "hexString"
+            },
+            {
+                "name" : "label",
+                "type" : "string"
+            },
+            {
+                "name" : "isTradingLogin",
+                "type" : "bool"
+            }
+        ]
+    },
+    "pendingLedgerEntrySnapshot" : {
+        "type"     : "array",
+        "elements" : {
+            "type"   : "array",
+            "fields" : [
+                {
+                    "name" : "id",
+                    "type" : "uint"
+                },
+                {
+                    "name" : "type",
+                    "type" : "string"
+                },
+                {
+                    "name"     : "changes",
+                    "type"     : "array",
+                    "elements" : {
+                        "type"   : "array",
+                        "fields" : [
+                            {
+                                "name" : "token",
+                                "type" : "string"
+                            },
+                            {
+                                "name" : "amount",
+                                "type" : "uintString"
+                            },
+                            {
+                                "name" : "fees",
+                                "type" : "uintString"
+                            },
+                            {
+                                "name" : "netAmount",
+                                "type" : "uintString"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name"     : "applied",
+                    "type"     : "array",
+                    "elements" : {
+                        "type"   : "array",
+                        "fields" : [
+                            {
+                                "name" : "settled",
+                                "type" : "int"
+                            },
+                            {
+                                "name" : "usable",
+                                "type" : "int"
+                            },
+                            {
+                                "name" : "blocked",
+                                "type" : "int"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "name" : "signature",
+                    "type" : "object",
+                    "keys" : {
+                        "v" : {
+                            "type" : "uint"
+                        },
+                        "r" : {
+                            "type" : "hexString"
+                        },
+                        "s" : {
+                            "type" : "hexString"
+                        },
+                        "nonce" : {
+                            "type" : "uint"
+                        }
+                    }
+                },
+                {
+                    "name" : "transactionHash",
+                    "type" : "hexString"
+                },
+                {
+                    "name" : "blockNumber",
+                    "type" : "uint"
+                },
+                {
+                    "name" : "blockHash",
+                    "type" : "hexString"
+                },
+                {
+                    "name" : "canceled",
+                    "type" : "bool"
+                },
+                {
+                    "name" : "timestamp",
+                    "type" : "uint"
+                },
+                {
+                    "name" : "description",
+                    "type" : "string"
+                }
+            ]
+        }
+    },
+    "historicalLedgerEntries" : {
+        "type" : "object",
+        "keys" : {
+            "ledgerEntries" : {
+                "type"   : "array",
+                "fields" : [
+                    {
+                        "name" : "id",
+                        "type" : "uint"
+                    },
+                    {
+                        "name" : "type",
+                        "type" : "string"
+                    },
+                    {
+                        "name"     : "changes",
+                        "type"     : "array",
+                        "elements" : {
+                            "type"   : "array",
+                            "fields" : [
+                                {
+                                    "name" : "token",
+                                    "type" : "string"
+                                },
+                                {
+                                    "name" : "amount",
+                                    "type" : "uintString"
+                                },
+                                {
+                                    "name" : "fees",
+                                    "type" : "uintString"
+                                },
+                                {
+                                    "name" : "netAmount",
+                                    "type" : "uintString"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name"     : "applied",
+                        "type"     : "array",
+                        "elements" : {
+                            "type"   : "array",
+                            "fields" : [
+                                {
+                                    "name" : "settled",
+                                    "type" : "int"
+                                },
+                                {
+                                    "name" : "usable",
+                                    "type" : "int"
+                                },
+                                {
+                                    "name" : "blocked",
+                                    "type" : "int"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name" : "signature",
+                        "type" : "object",
+                        "keys" : {
+                            "v" : {
+                                "type" : "uint"
+                            },
+                            "r" : {
+                                "type" : "hexString"
+                            },
+                            "s" : {
+                                "type" : "hexString"
+                            },
+                            "nonce" : {
+                                "type" : "uint"
+                            }
+                        }
+                    },
+                    {
+                        "name" : "transactionHash",
+                        "type" : "hexString"
+                    },
+                    {
+                        "name" : "blockNumber",
+                        "type" : "uint"
+                    },
+                    {
+                        "name" : "blockHash",
+                        "type" : "hexString"
+                    },
+                    {
+                        "name" : "canceled",
+                        "type" : "bool"
+                    },
+                    {
+                        "name" : "timestamp",
+                        "type" : "uint"
+                    },
+                    {
+                        "name" : "description",
+                        "type" : "string"
+                    }
+                ]
+            },,
+            "from" : {
+                "type"     : "uint",
+                "optional" : true
+            },
+            "to" : {
+                "type"     : "uint",
+                "optional" : true
+            },
+            "before" : {
+                "type"     : "uint",
+                "optional" : true
+            },
+            "limit" : {
+                "type"     : "uint",
+                "optional" : true
+            }
+        }
+    },
+    "ledgerEntryStatus" : {
+        "type"   : "array",
+        "fields" : [
+            {
+                "name" : "id",
+                "type" : "uint"
+            },
+            {
+                "name" : "type",
+                "type" : "string"
+            },
+            {
+                "name"     : "changes",
+                "type"     : "array",
+                "elements" : {
+                    "type"   : "array",
+                    "fields" : [
+                        {
+                            "name" : "token",
+                            "type" : "string"
+                        },
+                        {
+                            "name" : "amount",
+                            "type" : "uintString"
+                        },
+                        {
+                            "name" : "fees",
+                            "type" : "uintString"
+                        },
+                        {
+                            "name" : "netAmount",
+                            "type" : "uintString"
+                        }
+                    ]
+                }
+            },
+            {
+                "name"     : "applied",
+                "type"     : "array",
+                "elements" : {
+                    "type"   : "array",
+                    "fields" : [
+                        {
+                            "name" : "settled",
+                            "type" : "int"
+                        },
+                        {
+                            "name" : "usable",
+                            "type" : "int"
+                        },
+                        {
+                            "name" : "blocked",
+                            "type" : "int"
+                        }
+                    ]
+                }
+            },
+            {
+                "name" : "signature",
+                "type" : "object",
+                "keys" : {
+                    "v" : {
+                        "type" : "uint"
+                    },
+                    "r" : {
+                        "type" : "hexString"
+                    },
+                    "s" : {
+                        "type" : "hexString"
+                    },
+                    "nonce" : {
+                        "type" : "uint"
+                    }
+                }
+            },
+            {
+                "name" : "transactionHash",
+                "type" : "hexString"
+            },
+            {
+                "name" : "blockNumber",
+                "type" : "uint"
+            },
+            {
+                "name" : "blockHash",
+                "type" : "hexString"
+            },
+            {
+                "name" : "canceled",
+                "type" : "bool"
+            },
+            {
+                "name" : "timestamp",
+                "type" : "uint"
+            },
+            {
+                "name" : "description",
+                "type" : "string"
+            }
+        ]
+    },
     "activeOrderSnapshot"
     "historicalOrders"
     "orderStatus"
