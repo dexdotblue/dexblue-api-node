@@ -1,0 +1,23 @@
+{
+  "name": "dexblue-api-node",
+  "version": "0.0.1",
+  "description": "dex.blue API wrapper for node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@ssh.admin.coffee:client-apis/dexblue-api-node.git"
+  },
+  "keywords": [
+    "dex.blue",
+    "dex",
+    "API",
+    "ethereum",
+    "exchange",
+    "tokens"
+  ],
+  "author": "dex.blue",
+  "license": "MIT"
+}

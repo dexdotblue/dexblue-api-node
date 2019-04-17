@@ -1,0 +1,291 @@
+{
+    "config" : {
+        "type" : "object"
+    },
+    "listed" : {
+        "type" : "object"
+    },
+    "message" : {
+        "type" : "array",
+        "fields" : [
+            {
+                "name" : "message",
+                "type" : "string"
+            }
+        ]
+    },
+    "error" : {
+        "type" : "array",
+        "fields" : [
+            {
+                "name" : "error",
+                "type" : "string"
+            }
+        ]
+    },
+    "pingPong" : {
+        "type" : "string"
+    },
+    "reconnect" : {
+        "type" : "array",
+        "fields" : [
+            {
+                "name" : "timeout",
+                "type" : "uint"
+            },
+            {
+                "name" : "message",
+                "type" : "string"
+            }
+        ]
+    },
+    "orderBookSnapshot" : {
+        "type"     : "array",
+        "elements" : {
+            "type" : "array",
+            "fields" : [
+                {
+                    "name" : "direction",
+                    "type" : "binbool"
+                },
+                {
+                    "name" : "rate",
+                    "type" : "floatString"
+                },
+                {
+                    "name" : "amount",
+                    "type" : "uintString"
+                },
+                {
+                    "name" : "orderCount",
+                    "type" : "uint"
+                }
+            ]
+        }
+    },
+    "orderBookUpdate" : {
+        "type" : "array",
+        "fields" : [
+            {
+                "name" : "direction",
+                "type" : "binbool"
+            },
+            {
+                "name" : "rate",
+                "type" : "floatString"
+            },
+            {
+                "name" : "amount",
+                "type" : "uintString"
+            },
+            {
+                "name" : "orderCount",
+                "type" : "uint"
+            }
+        ]
+    },
+    "tradeSnapshot" : {
+        "type"     : "array",
+        "elements" : {
+            "type" : "array",
+            "fields" : [
+                {
+                    "name" : "id",
+                    "type" : "uint"
+                },
+                {
+                    "name" : "direction",
+                    "type" : "binbool"
+                },
+                {
+                    "name" : "rate",
+                    "type" : "floatString"
+                },
+                {
+                    "name" : "amount",
+                    "type" : "uintString"
+                },
+                {
+                    "name" : "timestamp",
+                    "type" : "uint"
+                }
+            ]
+        }
+    },
+    "trade" : {
+        "type" : "array",
+        "fields" : [
+            {
+                "name" : "id",
+                "type" : "uint"
+            },
+            {
+                "name" : "direction",
+                "type" : "binbool"
+            },
+            {
+                "name" : "rate",
+                "type" : "floatString"
+            },
+            {
+                "name" : "amount",
+                "type" : "uintString"
+            },
+            {
+                "name" : "timestamp",
+                "type" : "uint"
+            }
+        ]
+    },
+    "historicalTrades" : {
+        "type" : "object",
+        "keys" : {
+            "trades" : {
+                "type" : "array",
+                "elements" : {
+                    "type"   : "array",
+                    "fields" : [
+                        {
+                            "name" : "id",
+                            "type" : "uint"
+                        },
+                        {
+                            "name" : "market",
+                            "type" : "string"
+                        },
+                        {
+                            "name" : "direction",
+                            "type" : "binbool"
+                        },
+                        {
+                            "name" : "rate",
+                            "type" : "floatString"
+                        },
+                        {
+                            "name" : "amount",
+                            "type" : "uintString"
+                        },
+                        {
+                            "name" : "timestamp",
+                            "type" : "uint"
+                        }
+                    ]
+                }
+            },
+            "from" : {
+                "type"     : "uint",
+                "optional" : true
+            },
+            "to" : {
+                "type"     : "uint",
+                "optional" : true
+            },
+            "before" : {
+                "type"     : "uint",
+                "optional" : true
+            },
+            "limit" : {
+                "type"     : "uint",
+                "optional" : true
+            }
+        }
+    },
+    "ticker" : {
+        "type"   : "array",
+        "fields" : [
+            {
+                "name" : "rate",
+                "type" : "floatString"
+            },
+            {
+                "name" : "change24h",
+                "type" : "floatString"
+            },
+            {
+                "name" : "volumeTraded24h",
+                "type" : "floatString"
+            },
+            {
+                "name" : "volumeQuote24h",
+                "type" : "floatString"
+            },
+            {
+                "name" : "high24h",
+                "type" : "floatString"
+            },
+            {
+                "name" : "low24h",
+                "type" : "floatString"
+            }
+        ]
+    },
+    "barData" : {
+        "type" : "object",
+        "keys" : {
+            "trades" : {
+                "type" : "array",
+                "elements" : {
+                    "type"   : "array",
+                    "fields" : [
+                        {
+                            "name" : "timestamp",
+                            "type" : "float"
+                        },
+                        {
+                            "name" : "open",
+                            "type" : "float"
+                        },
+                        {
+                            "name" : "high",
+                            "type" : "float"
+                        },
+                        {
+                            "name" : "low",
+                            "type" : "float"
+                        },
+                        {
+                            "name" : "close",
+                            "type" : "float"
+                        },
+                        {
+                            "name" : "volume",
+                            "type" : "float"
+                        }
+                    ]
+                }
+            },
+            "from" : {
+                "type"     : "uint",
+                "optional" : true
+            },
+            "to" : {
+                "type"     : "uint",
+                "optional" : true
+            },
+            "precision" : {
+                "type"     : "string",
+                "optional" : true
+            },
+            "last" : {
+                "type"     : "bool",
+                "optional" : true
+            }
+        }
+    },
+    "rate"
+    "auth"
+    "balanceSnapshot"
+    "balanceStatus"
+    "delegateSnapshot"
+    "delegateStatus"
+    "pendingLedgerEntrySnapshot"
+    "historicalLedgerEntries"
+    "ledgerEntryStatus"
+    "activeOrderSnapshot"
+    "historicalOrders"
+    "orderStatus"
+    "userTrades"
+    "userTrade"
+    "signedWithdrawal"
+    "feeTier"
+}
