@@ -1117,6 +1117,22 @@
                         "type" : "uintString"
                     },
                     {
+                        "name" : "tradeFee",
+                        "type" : "uintString"
+                    },
+                    {
+                        "name" : "settlementFee",
+                        "type" : "uintString"
+                    },
+                    {
+                        "name" : "makerRebate",
+                        "type" : "uintString"
+                    },
+                    {
+                        "name" : "rebateToken",
+                        "type" : "string"
+                    },
+                    {
                         "name" : "timestamp",
                         "type" : "uint"
                     },
@@ -1155,6 +1171,22 @@
             {
                 "name" : "amount",
                 "type" : "uintString"
+            },
+            {
+                "name" : "tradeFee",
+                "type" : "uintString"
+            },
+            {
+                "name" : "settlementFee",
+                "type" : "uintString"
+            },
+            {
+                "name" : "makerRebate",
+                "type" : "uintString"
+            },
+            {
+                "name" : "rebateToken",
+                "type" : "string"
             },
             {
                 "name" : "timestamp",
