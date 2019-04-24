@@ -7,8 +7,8 @@
             "type" : "uint"
         },
         "signature":{
-            "type"  : "hexString",
-            "length": 132
+            "type"   : "hexString",
+            "length" : 132
         }
     },
     "authenticateDelegate" : {
@@ -19,8 +19,8 @@
             "type" : "uint"
         },
         "signature":{
-            "type"  : "hexString",
-            "length": 132
+            "type"   : "hexString",
+            "length" : 132
         }
     },
     "authenticateWithSession" : {
@@ -40,23 +40,23 @@
     "getHistoricalOrders" : [],
     "getUserTrades" : {
         "market":{
-            "type" : "string",
+            "type"     : "string",
             "optional" : true
         },
         "from":{
-            "type" : "uint",
+            "type"     : "uint",
             "optional" : true
         },
         "to":{
-            "type" : "uint",
+            "type"     : "uint",
             "optional" : true
         },
         "before":{
-            "type" : "uint",
+            "type"     : "uint",
             "optional" : true
         },
         "limit": {
-            "type" : "uint",
+            "type"     : "uint",
             "optional" : true
         }
     },
@@ -85,18 +85,18 @@
             "type" : "uint"
         },
         "cid":{
-            "type" : "uint",
+            "type"     : "uint",
             "optional" : true
         },
         "market":{
             "type" : "string"
         },
         "buy":{
-            "type" : "hexString",
+            "type"   : "hexString",
             "length" : 42
         },
         "sell":{
-            "type" : "hexString",
+            "type"   : "hexString",
             "length" : 42
         },
         "buyAmount":{
@@ -116,69 +116,69 @@
             "type" : "string"
         },
         "hidden":{
-            "type" : "bool",
+            "type"     : "bool",
             "optional" : true
         },
         "peggedTo":{
-            "type" : "string",
+            "type"     : "string",
             "optional" : true
         },
         "peggedRate":{
-            "type" : "string",
+            "type"     : "string",
             "optional" : true
         },
         "buyBookAmount":{
-            "type" : "uintString",
+            "type"     : "uintString",
             "optional" : true
         },
         "sellBookAmount":{
-            "type" : "uintString",
+            "type"     : "uintString",
             "optional" : true
         }
     },
     "cancelOrder" : {
         "id":{
-            "type" : "uint",
+            "type"     : "uint",
             "optional" : true
         },
         "cid":{
-            "type" : "uint",
+            "type"     : "uint",
             "optional" : true
         }
     },
     "cancelOrders" : {
-        "market":{
-            "type" : "string",
+        "market" : {
+            "type"     : "string",
             "optional" : true
         }
     },
     "editOrder" : {
         "id":{
-            "type" : "uint",
+            "type"     : "uint",
             "optional" : true
         },
         "cid":{
-            "type" : "uint",
+            "type"     : "uint",
             "optional" : true
         },
         "hidden":{
-            "type" : "bool",
+            "type"     : "bool",
             "optional" : true
         },
         "peggedTo":{
-            "type" : "string",
+            "type"     : "string",
             "optional" : true
         },
         "peggedRate":{
-            "type" : "string",
+            "type"     : "string",
             "optional" : true
         },
         "buyBookAmount":{
-            "type" : "uintString",
+            "type"     : "uintString",
             "optional" : true
         },
         "sellBookAmount":{
-            "type" : "uintString",
+            "type"     : "uintString",
             "optional" : true
         }
     },
@@ -198,7 +198,7 @@
     },
     "signWithdrawal" : {
         "token":{
-            "type" : "hexString",
+            "type"   : "hexString",
             "length" : 42
         },
         "amount":{
@@ -207,7 +207,7 @@
     },
     "signDelegationRemoval" : {
         "address":{
-            "type" : "hexString",
+            "type"   : "hexString",
             "length" : 42
         }
     },
@@ -216,32 +216,32 @@
             "type" : "uint"
         },
         "txhash":{
-            "type" : "hexString",
+            "type"   : "hexString",
             "length" : 66
         }
     },
     "announceDeposit" : {
         "token":{
-            "type" : "hexString",
+            "type"   : "hexString",
             "length" : 42
         },
         "amount":{
             "type" : "uintString"
         },
         "txhash":{
-            "type" : "hexString",
+            "type"   : "hexString",
             "length" : 66
         }
     },
     "getHistoricalLedgerEntries" : [],
     "getTokenInfo" : {
         "id":{
-            "type" : "string",
+            "type"     : "string",
             "optional" : true
         },
         "contract":{
-            "type" : "hexString",
-            "length" : 42,
+            "type"     : "hexString",
+            "length"   : 42,
             "optional" : true
         }
     },
@@ -250,14 +250,14 @@
             "type" : "string"
         },
         "signature":{
-            "type"  : "hexString",
-            "length": 132
+            "type"   : "hexString",
+            "length" : 132
         }
     },
     "registerTOTPSalt" : {
         "TOTPSecret":{
-            "type" : "string",
-            "length": 16
+            "type"   : "string",
+            "length" : 16
         },
         "salt":{
             "type"  : "string"
