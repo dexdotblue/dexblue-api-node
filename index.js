@@ -26,9 +26,9 @@ module.exports = class DexBlue{
 
         // parse parameters
         this.config  = {
-            endpoint     : parameters.endpoint || config.defaultEndpoint,
-            network      : parameters.endpoint || config.defaultEndpoint,
-            web3Provider : parameters.endpoint || config.defaultEndpoint
+            endpoint     : parameters.endpoint     || config.defaultEndpoint,
+            network      : parameters.network      || config.defaultNetwork,
+            web3Provider : parameters.web3Provider || config.defaultWeb3Provider
         }
         this.chainId = parameters.chainId || config.chainIds[this.config.network]
 
@@ -66,7 +66,7 @@ module.exports = class DexBlue{
                 }
 
                 // validate the provided parameters before sending the packet
-                this.utils.validateClientInput(this.commands[method], parameters)
+                this.utils.validateClientInput(this.methods[method], parameters)
 
                 // add c parameter, if missing
                 parameters.c = method
@@ -83,11 +83,13 @@ module.exports = class DexBlue{
             if(callback) callback.apply(null, arguments)
             self.callEventListers("wsConnected", arguments);
         })
-        this.ws.on('error', function(){
-            self.callEventListers("wsError", arguments);
+        this.ws.on('error', function(error){
+            self.callEventListers("wsError", error);
+            if(Object.keys(self.callbacks.wsError).length == 0) throw error
         })
-        this.ws.on('close', function(){
-            self.callEventListers("wsDisconnect", arguments);
+        this.ws.on('close', function(error){
+            self.callEventListers("wsDisconnect", error);
+            if(Object.keys(self.callbacks.wsDisconnect).length == 0) throw error
         })
 
         this.ws.on('message', function(body, flags){
@@ -150,7 +152,7 @@ module.exports = class DexBlue{
         if(typeof(callback) != "function") throw "invalid or missing callback function"
 
         // add event listener to event
-        this.callbacks[event]
+        this.callbacks[event].push(callback)
     }
     // remove an event lister for a server event
     clear(event, callback){
@@ -172,9 +174,10 @@ module.exports = class DexBlue{
         }
     }
     sendWithCallback(message, callback){
-        let rid     = this.rid++,
-            // allow for the passing of single messages as well as arrays
-            message = Array.isArray(message)?message:[message]
+        let rid     = this.rid++
+
+        // allow for the passing of single messages as well as arrays
+        message = Array.isArray(message)?message:[message]
 
         // add rid to every packet
         for(let i in message){
@@ -204,12 +207,12 @@ module.exports = class DexBlue{
 }
 
 class DexBlueUtils{
-    constructor(){
+    constructor(parameters){
         // input validation
         parameters = parameters || {}
         if(typeof parameters != "object") throw ""
 
-        this.web3 = new Web3();
+        this.web3 = new Web3(parameters.web3Provider);
     }
     validateClientInput(expected, parameters){
         // check if all expected are in parameters
@@ -271,8 +274,62 @@ class DexBlueUtils{
             }
         }
     }
-    parseServerPacket(){
-        // todo
+    parseServerPacket(format, msg){
+        let parsed
+        
+        switch(format.type){
+            // simple types
+            case "uint":
+            case "string":
+            case "hexString":
+            case "bool":
+                parsed = msg
+                break;
+            case "binbool":
+                parsed = msg?true:false
+                break;
+            case "uintString":
+            case "floatString":
+                parsed = new BigNumber(msg)
+                break;
+
+            // structures
+            case "array":
+                if(format.fields){
+                    parsed = {}
+
+                    if(format.fields.length != msg.length) throw "invalid format spec"
+
+                    for(let i in format.fields){
+                        let field = format.fields[i]
+                        parsed[field.name] = this.parseServerPacket(field, msg[i])
+                    }
+                }else if(format.elements){
+                    parsed = []
+                    for(let i in msg){
+                        parsed.push(this.parseServerPacket(format.elements, msg[i]))
+                    }
+                }else{
+                    throw "invalid format spec"
+                }
+                break;
+            case "object":
+                parsed = {}
+
+                for(let key in format.keys){
+                    if(msg[key]){
+                        parsed[key] = this.parseServerPacket(format.keys[i], msg[key])
+                    }else if(!format.keys[key].optional){
+                        throw "invalid format spec"
+                    }
+                }
+                break;
+            default:
+                throw "invalid format spec"
+                break;
+        }
+
+        return parsed
     }
     hashOrder(order){
         return web3Utils.soliditySha3(
