@@ -28,7 +28,10 @@ module.exports = class DexBlue{
         this.config  = {
             endpoint     : parameters.endpoint     || config.defaultEndpoint,
             network      : parameters.network      || config.defaultNetwork,
-            web3Provider : parameters.web3Provider || config.defaultWeb3Provider
+            web3Provider : parameters.web3Provider || config.defaultWeb3Provider,
+            account      : parameters.account,
+            delegate     : parameters.delegate,
+            noAutoAuth   : parameters.noAutoAuth || false
         }
         this.chainId = parameters.chainId || config.chainIds[this.config.network]
 
@@ -80,6 +83,15 @@ module.exports = class DexBlue{
         this.ws = new WebSocket(this.config.endpoint);
 
         this.ws.on('open', function(){
+            // automatically authenticate, if a private key was provided at startup
+            if(!self.config.noAutoAuth){
+                if(self.config.account){
+                    self.authenticate(self.config.account)
+                }else if(self.config.delegate){
+                    self.authenticateDelegate(self.config.delegate)
+                }
+            }
+
             self.callEventListers("wsConnected", arguments);
         })
         this.ws.on('error', function(error){
@@ -203,6 +215,37 @@ module.exports = class DexBlue{
     send(message){
         this.ws.send(JSON.stringify(message))
     }
+    authenticate(privateKey){
+        let nonce = Date.now()
+        this.methods.authenticate({
+            message   : nonce.toString(),
+            nonce     : nonce,
+            signature : this.utils.web3.eth.accounts.sign(nonce.toString(), privateKey).signature
+        }, console.log)
+    }
+    authenticateDelegate(privateKey){
+        let nonce = Date.now()
+        this.methods.authenticateDelegate({
+            message   : nonce.toString(),
+            nonce     : nonce,
+            signature : this.utils.web3.eth.accounts.sign(nonce.toString(), privateKey).signature
+        }, console.log)
+    }
+    placeOrder(order, callback){
+        // add necessary parameters to place order if missing
+        order.type            = order.type            || "limit"
+        order.nonce           = order.nonce           || Date.now()
+        order.contractAddress = order.contractAddress || this.configPacket.contractAddress
+        order.hash            = order.hash            || this.utils.hashOrder(order)
+        order.signature       = order.signature       || this.utils.web3.eth.accounts.sign(order.hash, this.config.account || this.config.delegate).signature
+        order.signatureFormat = order.signatureFormat || "sign"
+
+        delete order.hash
+        delete order.contractAddress
+        order.buyAmount  = order.buyAmount.toString(10)
+        order.sellAmount = order.sellAmount.toString(10)
+        this.methods.placeOrder(order, callback)
+    }
 }
 
 class DexBlueUtils{
@@ -277,9 +320,17 @@ class DexBlueUtils{
     parseServerPacket(format, msg){
         let parsed
         
+        // check if value is undefined
+        if(msg === null){
+            if(!format.optional) throw "invalid format spec"
+            return null
+        }
+
         switch(format.type){
             // simple types
             case "uint":
+            case "int":
+            case "float":
             case "string":
             case "hexString":
             case "bool":
@@ -288,6 +339,7 @@ class DexBlueUtils{
             case "binbool":
                 parsed = msg?true:false
                 break;
+            case "intString":
             case "uintString":
             case "floatString":
                 parsed = new BigNumber(msg)
@@ -340,7 +392,7 @@ class DexBlueUtils{
         return parsed
     }
     hashOrder(order){
-        return web3Utils.soliditySha3(
+        return this.web3.utils.soliditySha3(
             {type: 'address', value: order.buy.toLowerCase()},
             {type: 'address', value: order.sell.toLowerCase()},
             {type: 'uint256', value: order.buyAmount.toString(10)},

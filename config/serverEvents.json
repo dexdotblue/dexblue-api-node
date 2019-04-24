@@ -62,23 +62,11 @@
     },
     "message" : {
         "id"   : "m",
-        "type" : "array",
-        "fields" : [
-            {
-                "name" : "message",
-                "type" : "string"
-            }
-        ]
+        "type" : "string"
     },
     "error" : {
         "id"   : "e",
-        "type" : "array",
-        "fields" : [
-            {
-                "name" : "error",
-                "type" : "string"
-            }
-        ]
+        "type" : "string"
     },
     "pingPong" : {
         "id"   : "p",
@@ -359,8 +347,9 @@
                 "type" : "hexString"
             },
             {
-                "name" : "session",
-                "type" : "string"
+                "name"     : "session",
+                "type"     : "string",
+                "optional" : true
             },
             {
                 "name" : "delegate",
@@ -434,8 +423,9 @@
                     "type" : "bool"
                 },
                 {
-                    "name" : "removalSignature",
-                    "type" : "hexString"
+                    "name"     : "removalSignature",
+                    "type"     : "hexString",
+                    "optional" : true
                 },
                 {
                     "name" : "label",
@@ -465,8 +455,9 @@
                 "type" : "bool"
             },
             {
-                "name" : "removalSignature",
-                "type" : "hexString"
+                "name"     : "removalSignature",
+                "type"     : "hexString",
+                "optional" : true
             },
             {
                 "name" : "label",
@@ -504,15 +495,15 @@
                             },
                             {
                                 "name" : "amount",
-                                "type" : "uintString"
+                                "type" : "intString"
                             },
                             {
                                 "name" : "fees",
-                                "type" : "uintString"
+                                "type" : "intString"
                             },
                             {
                                 "name" : "netAmount",
-                                "type" : "uintString"
+                                "type" : "intString"
                             }
                         ]
                     }
@@ -554,19 +545,23 @@
                         "nonce" : {
                             "type" : "uint"
                         }
-                    }
+                    },
+                    "optional" : true
                 },
                 {
                     "name" : "transactionHash",
-                    "type" : "hexString"
+                    "type" : "hexString",
+                    "optional" : true
                 },
                 {
                     "name" : "blockNumber",
-                    "type" : "uint"
+                    "type" : "uint",
+                    "optional" : true
                 },
                 {
                     "name" : "blockHash",
-                    "type" : "hexString"
+                    "type" : "hexString",
+                    "optional" : true
                 },
                 {
                     "name" : "canceled",
@@ -610,15 +605,15 @@
                                 },
                                 {
                                     "name" : "amount",
-                                    "type" : "uintString"
+                                    "type" : "intString"
                                 },
                                 {
                                     "name" : "fees",
-                                    "type" : "uintString"
+                                    "type" : "intString"
                                 },
                                 {
                                     "name" : "netAmount",
-                                    "type" : "uintString"
+                                    "type" : "intString"
                                 }
                             ]
                         }
@@ -660,19 +655,23 @@
                             "nonce" : {
                                 "type" : "uint"
                             }
-                        }
+                        },
+                        "optional" : true
                     },
                     {
                         "name" : "transactionHash",
-                        "type" : "hexString"
+                        "type" : "hexString",
+                        "optional" : true
                     },
                     {
                         "name" : "blockNumber",
-                        "type" : "uint"
+                        "type" : "uint",
+                        "optional" : true
                     },
                     {
                         "name" : "blockHash",
-                        "type" : "hexString"
+                        "type" : "hexString",
+                        "optional" : true
                     },
                     {
                         "name" : "canceled",
@@ -730,15 +729,15 @@
                         },
                         {
                             "name" : "amount",
-                            "type" : "uintString"
+                            "type" : "intString"
                         },
                         {
                             "name" : "fees",
-                            "type" : "uintString"
+                            "type" : "intString"
                         },
                         {
                             "name" : "netAmount",
-                            "type" : "uintString"
+                            "type" : "intString"
                         }
                     ]
                 }
@@ -780,19 +779,23 @@
                     "nonce" : {
                         "type" : "uint"
                     }
-                }
+                },
+                "optional" : true
             },
             {
                 "name" : "transactionHash",
-                "type" : "hexString"
+                "type" : "hexString",
+                "optional" : true
             },
             {
                 "name" : "blockNumber",
-                "type" : "uint"
+                "type" : "uint",
+                "optional" : true
             },
             {
                 "name" : "blockHash",
-                "type" : "hexString"
+                "type" : "hexString",
+                "optional" : true
             },
             {
                 "name" : "canceled",
@@ -875,12 +878,14 @@
                     "type" : "floatString"
                 },
                 {
-                    "name" : "peggedCurrency",
-                    "type" : "string"
+                    "name"     : "peggedCurrency",
+                    "type"     : "string",
+                    "optional" : true
                 },
                 {
-                    "name" : "peggedRate",
-                    "type" : "floatString"
+                    "name"     : "peggedRate",
+                    "type"     : "floatString",
+                    "optional" : true
                 },
                 {
                     "name" : "hidden",
@@ -982,12 +987,14 @@
                             "type" : "floatString"
                         },
                         {
-                            "name" : "peggedCurrency",
-                            "type" : "string"
+                            "name"     : "peggedCurrency",
+                            "type"     : "string",
+                            "optional" : true
                         },
                         {
-                            "name" : "peggedRate",
-                            "type" : "floatString"
+                            "name"     : "peggedRate",
+                            "type"     : "floatString",
+                            "optional" : true
                         },
                         {
                             "name" : "hidden",
@@ -1106,12 +1113,14 @@
                 "type" : "floatString"
             },
             {
-                "name" : "peggedCurrency",
-                "type" : "string"
+                "name"     : "peggedCurrency",
+                "type"     : "string",
+                "optional" : true
             },
             {
-                "name" : "peggedRate",
-                "type" : "floatString"
+                "name"     : "peggedRate",
+                "type"     : "floatString",
+                "optional" : true
             },
             {
                 "name" : "hidden",
@@ -1202,7 +1211,7 @@
         }
     },
     "userTrade" : {
-        "id"   : "ts",
+        "id"   : "ut",
         "type" : "array",
         "fields" : [
             {
