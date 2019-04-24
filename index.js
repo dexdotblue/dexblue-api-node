@@ -13,7 +13,7 @@ let config         = JSON.parse(fs.readFileSync('config/config.json')),
 
 // create server event id mapping
 for(event in serverEvents){
-    serverEventIds[serverEvents[event]] = event
+    serverEventIds[serverEvents[event].id] = event
 }
 
 // dexBlue class
@@ -66,7 +66,7 @@ module.exports = class DexBlue{
                 }
 
                 // validate the provided parameters before sending the packet
-                this.utils.validateClientInput(this.methods[method], parameters)
+                this.utils.validateClientInput(clientMethods[method], parameters)
 
                 // add c parameter, if missing
                 parameters.c = method
@@ -80,7 +80,6 @@ module.exports = class DexBlue{
         this.ws = new WebSocket(this.config.endpoint);
 
         this.ws.on('open', function(){
-            if(callback) callback.apply(null, arguments)
             self.callEventListers("wsConnected", arguments);
         })
         this.ws.on('error', function(error){
@@ -122,7 +121,7 @@ module.exports = class DexBlue{
 
                     // Normal callback is used
                     if(handler.type == "callback"){
-                        if(event_name == "error"){
+                        if(event == "error"){
                             handler.callback(chan, event, msg, msg, parsed)
                         }else{
                             handler.callback(chan, event, null, msg, parsed)
@@ -130,7 +129,7 @@ module.exports = class DexBlue{
 
                     // Promise is used
                     }else if(handler.type == "promise"){
-                        if(event_name == "error"){
+                        if(event == "error"){
                             handler.reject(new Error(msg))
                         }else{
                             handler.resolve(chan, event, msg, parsed)
@@ -225,25 +224,26 @@ class DexBlueUtils{
                 // check if parameter has the right type
                 switch(check.type){
                     case "uint":
-                        if(!Number.isInteger(val) || val < 0) throw 'Malformed parameter '+key+', expected an unsigned integer.'
+                        if(!Number.isInteger(val) || val < 0) throw 'Malformed parameter: '+key+', expected an unsigned integer.'
                         break;
                     case "uintString":
-                        if(!Number.isInteger(Number(val)) || Number(val) < 0) throw 'Malformed parameter '+key+', expected an unsigned integer wrapped in a string (to prevent rounding errors).'
+                        if(!Number.isInteger(Number(val)) || Number(val) < 0) throw 'Malformed parameter: '+key+', expected an unsigned integer wrapped in a string (to prevent rounding errors).'
                         break;
                     case "bool":
-                        if(typeof(val) !== "boolean") throw 'Malformed parameter '+key+', expected a boolean.'
+                        if(typeof(val) !== "boolean") throw 'Malformed parameter: '+key+', expected a boolean.'
                         break;
                     case "string":
-                        if(typeof(val) !== "string") throw 'Malformed parameter '+key+', expected a string.'
+                        if(typeof(val) !== "string") throw 'Malformed parameter: '+key+', expected a string.'
                         break;
                     case "hexString":
-                        if(!/^0x[0-9a-fA-F]+$/.test(val)) throw 'Malformed parameter '+key+', expected a hex string (with leading 0x).'
+                        if(!/^0x[0-9a-fA-F]+$/.test(val)) throw 'Malformed parameter: '+key+', expected a hex string (with leading 0x).'
                         break;
                     case "array":
-                        if(!Array.isArray(val)) throw 'Malformed parameter '+key+', expected an array.'
+                        if(!Array.isArray(val)) throw 'Malformed parameter: '+key+', expected an array.'
                         if(check.elements){
-                            for(i in val){
-                                this.validateClientInput({"arrayElement":{type:check.elements}},{"arrayElement":val[i]})
+                            for(let i in val){
+
+                                this.validateClientInput({"array element":check.elements},{"array element":val[i]})
                             }
                         }
                         break;
@@ -314,14 +314,22 @@ class DexBlueUtils{
                 }
                 break;
             case "object":
-                parsed = {}
-
-                for(let key in format.keys){
-                    if(msg[key]){
-                        parsed[key] = this.parseServerPacket(format.keys[i], msg[key])
-                    }else if(!format.keys[key].optional){
-                        throw "invalid format spec"
+                if(format.keys){
+                    parsed = {}
+                    for(let key in format.keys){
+                        if(msg[key]){
+                            parsed[key] = this.parseServerPacket(format.keys[key], msg[key])
+                        }else if(!format.keys[key].optional){
+                            throw "invalid format spec"
+                        }
                     }
+                }else if(format.elements){
+                    parsed = {}
+                    for(let key in msg){
+                        parsed[key] = this.parseServerPacket(format.elements, msg[key])
+                    }
+                }else{
+                    throw "invalid format spec"
                 }
                 break;
             default:

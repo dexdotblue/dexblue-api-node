@@ -6,9 +6,20 @@ var DexBlue  = require('./index.js'),
 var API = new DexBlue()
 
 API.on('wsConnected', function(){
-    API.methods.getListed(console.log)
+    API.methods.getListed(function(market, event, error, packet){
+        API.methods.subscribe({
+            markets : Object.keys(packet.markets),
+            events  : ["book20d5"]
+        })
+    })
 })
+
+API.on('orderBookUpdate', console.log)
+
+API.on('orderBookSnapshot', console.log)
 
 API.on('wsError', function(error){
     throw error
 })
+
+// API.on('config', console.log)

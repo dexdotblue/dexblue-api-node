@@ -63,21 +63,29 @@
     "subscribe" : {
         "markets":{
             "type"      : "array",
-            "elements"  : "string"
+            "elements"  : {
+                "type" : "string"
+            }
         },
         "events":{
             "type"      : "array",
-            "elements"  : "string"
+            "elements"  : {
+                "type" : "string"
+            }
         }
     },
     "unSubscribe" : {
         "markets":{
             "type"      : "array",
-            "elements"  : "string"
+            "elements"  : {
+                "type" : "string"
+            }
         },
         "events":{
             "type"      : "array",
-            "elements"  : "string"
+            "elements"  : {
+                "type" : "string"
+            }
         }
     },
     "placeOrder" : {

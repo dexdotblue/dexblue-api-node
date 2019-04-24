@@ -1,11 +1,64 @@
 {
     "config" : {
         "id"   : "c",
-        "type" : "object"
+        "type" : "object",
+        "keys" : {
+            "barDataPrecisions":{
+                "type":"object",
+                "elements": {
+                    "type":"uint"
+                }
+            },
+            "contractAddress":{
+                "type" : "string"
+            },
+            "conversionCurrencies":{
+                "type":"object",
+                "elements":{
+                    "type":"string"
+                }
+            },
+            "network":{
+                "type" : "string"
+            }
+        }
     },
     "listed" : {
         "id"   : "l",
-        "type" : "object"
+        "type" : "object",
+        "keys" : {
+            "tokens" : {
+                "type"     : "object",
+                "elements" : {
+                    "type" : "object",
+                    "keys" : {
+                        "contract" : {
+                            "type" : "hexString"
+                        },
+                        "name" : {
+                            "type" : "string"
+                        },
+                        "decimals" : {
+                            "type" : "uint"
+                        }
+                    }
+                }
+            },
+            "markets" : {
+                "type"     : "object",
+                "elements" : {
+                    "type" : "object",
+                    "keys" : {
+                        "traded" : {
+                            "type" : "string"
+                        },
+                        "quote" : {
+                            "type" : "string"
+                        }
+                    }
+                }
+            }
+        }
     },
     "message" : {
         "id"   : "m",
