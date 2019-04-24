@@ -1,11 +1,14 @@
 {
     "config" : {
+        "id"   : "c",
         "type" : "object"
     },
     "listed" : {
+        "id"   : "l",
         "type" : "object"
     },
     "message" : {
+        "id"   : "m",
         "type" : "array",
         "fields" : [
             {
@@ -15,6 +18,7 @@
         ]
     },
     "error" : {
+        "id"   : "e",
         "type" : "array",
         "fields" : [
             {
@@ -24,9 +28,11 @@
         ]
     },
     "pingPong" : {
+        "id"   : "p",
         "type" : "string"
     },
     "reconnect" : {
+        "id"   : "rc",
         "type" : "array",
         "fields" : [
             {
@@ -40,6 +46,7 @@
         ]
     },
     "orderBookSnapshot" : {
+        "id"       : "obs",
         "type"     : "array",
         "elements" : {
             "type" : "array",
@@ -64,7 +71,8 @@
         }
     },
     "orderBookUpdate" : {
-        "type" : "array",
+        "id"     : "ob",
+        "type"   : "array",
         "fields" : [
             {
                 "name" : "direction",
@@ -85,6 +93,7 @@
         ]
     },
     "tradeSnapshot" : {
+        "id"       : "ts",
         "type"     : "array",
         "elements" : {
             "type" : "array",
@@ -113,7 +122,8 @@
         }
     },
     "trade" : {
-        "type" : "array",
+        "id"     : "t",
+        "type"   : "array",
         "fields" : [
             {
                 "name" : "id",
@@ -138,6 +148,7 @@
         ]
     },
     "historicalTrades" : {
+        "id"   : "ht",
         "type" : "object",
         "keys" : {
             "trades" : {
@@ -195,6 +206,7 @@
         }
     },
     "ticker" : {
+        "id"     : "ti",
         "type"   : "array",
         "fields" : [
             {
@@ -224,6 +236,7 @@
         ]
     },
     "barData" : {
+        "id"   : "bd",
         "type" : "object",
         "keys" : {
             "trades" : {
@@ -277,9 +290,11 @@
         }
     },
     "rate" : {
+        "id"   : "r",
         "type" : "float"
     },
     "auth" : {
+        "id"   : "auth",
         "type" : "array",
         "fields" : [
             {
@@ -301,6 +316,7 @@
         ]
     },
     "balanceSnapshot" : {
+        "id"   : "bs",
         "type" : "array",
         "elements" : {
             "type"   : "array",
@@ -325,6 +341,7 @@
         }
     },
     "balanceStatus" : {
+        "id"     : "b",
         "type"   : "array",
         "fields" : [
             {
@@ -346,6 +363,7 @@
         ]
     },
     "delegateSnapshot" : {
+        "id"   : "ds",
         "type" : "array",
         "elements" : {
             "type"   : "array",
@@ -378,6 +396,7 @@
         }
     },
     "delegateStatus" : {
+        "id"     : "d",
         "type"   : "array",
         "fields" : [
             {
@@ -407,6 +426,7 @@
         ]
     },
     "pendingLedgerEntrySnapshot" : {
+        "id"       : "les",
         "type"     : "array",
         "elements" : {
             "type"   : "array",
@@ -511,6 +531,7 @@
         }
     },
     "historicalLedgerEntries" : {
+        "id"   : "hle",
         "type" : "object",
         "keys" : {
             "ledgerEntries" : {
@@ -633,6 +654,7 @@
         }
     },
     "ledgerEntryStatus" : {
+        "id"     : "le",
         "type"   : "array",
         "fields" : [
             {
@@ -734,6 +756,7 @@
         ]
     },
     "activeOrderSnapshot" : {
+        "id"   : "os",
         "type" : "array",
         "elements" : {
             "type"   : "array",
@@ -837,6 +860,7 @@
         }
     },
     "historicalOrders" : {
+        "id"   : "ho",
         "type" : "object",
         "keys" : {
             "orders" : {
@@ -965,6 +989,7 @@
         }
     },
     "orderStatus" : {
+        "id"     : "o",
         "type"   : "array",
         "fields" : [
             {
@@ -1065,6 +1090,7 @@
         ]
     },
     "userTrades" : {
+        "id"   : "uts",
         "type" : "object",
         "keys" : {
             "trades" : {
@@ -1107,6 +1133,7 @@
         }
     },
     "userTrade" : {
+        "id"   : "ts",
         "type" : "array",
         "fields" : [
             {
@@ -1144,6 +1171,7 @@
         ]
     },
     "signedWithdrawal" : {
+        "id"   : "sw",
         "type" : "object",
         "keys" : {
             "sig" : {
@@ -1169,6 +1197,7 @@
         }
     },
     "feeTier" : {
+        "id"     : "ft",
         "type"   : "array",
         "fields" : [
             {
