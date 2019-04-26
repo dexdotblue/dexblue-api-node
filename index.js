@@ -393,8 +393,8 @@ class DexBlueUtils{
     }
     hashOrder(order){
         return this.web3.utils.soliditySha3(
-            {type: 'address', value: order.buy.toLowerCase()},
-            {type: 'address', value: order.sell.toLowerCase()},
+            {type: 'address', value: order.buyToken.toLowerCase()},
+            {type: 'address', value: order.sellToken.toLowerCase()},
             {type: 'uint256', value: order.buyAmount.toString(10)},
             {type: 'uint256', value: order.sellAmount.toString(10)},
             {type: 'uint64',  value: order.nonce},

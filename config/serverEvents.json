@@ -423,9 +423,22 @@
                     "type" : "bool"
                 },
                 {
-                    "name"     : "removalSignature",
-                    "type"     : "hexString",
-                    "optional" : true
+                    "name" : "removalSignature",
+                    "type" : "object",
+                    "keys" : {
+                        "v" : {
+                            "type" : "uint",
+                            "optional" : true
+                        },
+                        "r" : {
+                            "type" : "hexString",
+                            "optional" : true
+                        },
+                        "s" : {
+                            "type" : "hexString",
+                            "optional" : true
+                        }
+                    }
                 },
                 {
                     "name" : "label",
@@ -455,9 +468,22 @@
                 "type" : "bool"
             },
             {
-                "name"     : "removalSignature",
-                "type"     : "hexString",
-                "optional" : true
+                "name" : "removalSignature",
+                "type" : "object",
+                "keys" : {
+                    "v" : {
+                        "type" : "uint",
+                        "optional" : true
+                    },
+                    "r" : {
+                        "type" : "hexString",
+                        "optional" : true
+                    },
+                    "s" : {
+                        "type" : "hexString",
+                        "optional" : true
+                    }
+                }
             },
             {
                 "name" : "label",
@@ -534,19 +560,22 @@
                     "type" : "object",
                     "keys" : {
                         "v" : {
-                            "type" : "uint"
+                            "type" : "uint",
+                            "optional" : true
                         },
                         "r" : {
-                            "type" : "hexString"
+                            "type" : "hexString",
+                            "optional" : true
                         },
                         "s" : {
-                            "type" : "hexString"
+                            "type" : "hexString",
+                            "optional" : true
                         },
                         "nonce" : {
-                            "type" : "uint"
+                            "type" : "uint",
+                            "optional" : true
                         }
-                    },
-                    "optional" : true
+                    }
                 },
                 {
                     "name" : "transactionHash",
@@ -644,19 +673,22 @@
                         "type" : "object",
                         "keys" : {
                             "v" : {
-                                "type" : "uint"
+                                "type" : "uint",
+                                "optional" : true
                             },
                             "r" : {
-                                "type" : "hexString"
+                                "type" : "hexString",
+                                "optional" : true
                             },
                             "s" : {
-                                "type" : "hexString"
+                                "type" : "hexString",
+                                "optional" : true
                             },
                             "nonce" : {
-                                "type" : "uint"
+                                "type" : "uint",
+                                "optional" : true
                             }
-                        },
-                        "optional" : true
+                        }
                     },
                     {
                         "name" : "transactionHash",
@@ -768,19 +800,22 @@
                 "type" : "object",
                 "keys" : {
                     "v" : {
-                        "type" : "uint"
+                        "type" : "uint",
+                        "optional" : true
                     },
                     "r" : {
-                        "type" : "hexString"
+                        "type" : "hexString",
+                        "optional" : true
                     },
                     "s" : {
-                        "type" : "hexString"
+                        "type" : "hexString",
+                        "optional" : true
                     },
                     "nonce" : {
-                        "type" : "uint"
+                        "type" : "uint",
+                        "optional" : true
                     }
-                },
-                "optional" : true
+                }
             },
             {
                 "name" : "transactionHash",
@@ -1263,32 +1298,6 @@
                 "type" : "uint"
             }
         ]
-    },
-    "signedWithdrawal" : {
-        "id"   : "sw",
-        "type" : "object",
-        "keys" : {
-            "sig" : {
-                "type" : "object",
-                "keys" : {
-                    "v" : {
-                        "type" : "uint"
-                    },
-                    "r" : {
-                        "type" : "hexString"
-                    },
-                    "s" : {
-                        "type" : "hexString"
-                    },
-                    "nonce" : {
-                        "type" : "uint"
-                    }
-                }
-            },
-            "id" : {
-                "type" : "uint"
-            }
-        }
     },
     "feeTier" : {
         "id"     : "ft",
