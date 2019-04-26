@@ -33,11 +33,76 @@
         }
 
     },
-    "logoff" : [],
-    "getAcceptedFee" : [],
-    "getListed" : [],
-    "getActiveOrderSnapshot" : [],
-    "getHistoricalOrders" : [],
+    "logoff" : {},
+    "getAcceptedFee" : {},
+    "getListed" : {},
+    "getActiveOrderSnapshot" : {},
+    "getHistoricalOrders" : {
+        "market":{
+            "type"     : "string",
+            "optional" : true
+        },
+        "from":{
+            "type"     : "uint",
+            "optional" : true
+        },
+        "to":{
+            "type"     : "uint",
+            "optional" : true
+        },
+        "before":{
+            "type"     : "uint",
+            "optional" : true
+        },
+        "limit": {
+            "type"     : "uint",
+            "optional" : true
+        }
+    },
+    "getHistoricalLedgerEntries" : {
+        "market":{
+            "type"     : "string",
+            "optional" : true
+        },
+        "from":{
+            "type"     : "uint",
+            "optional" : true
+        },
+        "to":{
+            "type"     : "uint",
+            "optional" : true
+        },
+        "before":{
+            "type"     : "uint",
+            "optional" : true
+        },
+        "limit": {
+            "type"     : "uint",
+            "optional" : true
+        }
+    },
+    "getHistoricalTrades" : {
+        "market":{
+            "type"     : "string",
+            "optional" : true
+        },
+        "from":{
+            "type"     : "uint",
+            "optional" : true
+        },
+        "to":{
+            "type"     : "uint",
+            "optional" : true
+        },
+        "before":{
+            "type"     : "uint",
+            "optional" : true
+        },
+        "limit": {
+            "type"     : "uint",
+            "optional" : true
+        }
+    },
     "getUserTrades" : {
         "market":{
             "type"     : "string",
@@ -99,11 +164,11 @@
         "market":{
             "type" : "string"
         },
-        "buy":{
+        "buyToken":{
             "type"   : "hexString",
             "length" : 42
         },
-        "sell":{
+        "sellToken":{
             "type"   : "hexString",
             "length" : 42
         },
@@ -241,7 +306,6 @@
             "length" : 66
         }
     },
-    "getHistoricalLedgerEntries" : [],
     "getTokenInfo" : {
         "id":{
             "type"     : "string",

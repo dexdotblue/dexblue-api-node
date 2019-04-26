@@ -18,8 +18,8 @@ API.on('wsConnected', function(){
             market     : "ENGETH",
             buyAmount  : new BigNumber("3000000000"),
             sellAmount : new BigNumber("100000000000000000"),
-            buy        : packet.tokens.ENG.contract,
-            sell       : packet.tokens.ETH.contract
+            buyToken   : packet.tokens.ENG.contract,
+            sellToken  : packet.tokens.ETH.contract
         }, console.log)
     })
 })
