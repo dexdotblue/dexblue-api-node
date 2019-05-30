@@ -118,8 +118,20 @@ module.exports = class DexBlue{
                     event    = serverEventIds[eventId],
                     parsed
 
-                // store config packet
+                // store config & listed packets
                 if(event == "config") self.configPacket = msg
+                if(event == "listed"){
+                    self.listedPacket = msg
+                    self.listedPacket.tokensByContract = {}
+                    for(let symbol in msg.tokens){
+                        let token = msg.tokens[symbol]
+                        token.symbol = symbol
+                        self.listedPacket.tokensByContract[token.contract] = token
+                    }
+                    for(let symbol in msg.markets){
+                        msg.markets[symbol].symbol = symbol
+                    }
+                }
 
                 // parse server packets
                 parsed = self.utils.parseServerPacket(serverEvents[event], msg)
@@ -232,18 +244,125 @@ module.exports = class DexBlue{
         }, console.log)
     }
     placeOrder(order, callback){
-        // add necessary parameters to place order if missing
-        order.type            = order.type            || "limit"
-        order.nonce           = order.nonce           || Date.now()
-        order.contractAddress = order.contractAddress || this.configPacket.contractAddress
-        order.hash            = order.hash            || this.utils.hashOrder(order)
-        order.signature       = order.signature       || this.utils.web3.eth.accounts.sign(order.hash, this.config.account || this.config.delegate).signature
-        order.signatureFormat = order.signatureFormat || "sign"
+        // fetch listed packet, if it was not requested already
+        if(!this.listedPacket){
+            this.methods.getListed(() => {
+                this.placeOrder(order, callback)
+            })
+            return
+        }
 
-        delete order.hash
-        delete order.contractAddress
+        // check the market parameter, if it exists
+        if(order.market){
+            // check if the market id id known
+            if(!(order.market = this.listedPacket.markets[order.market])) throw new Error("Unknown Market")
+        }else{
+            if(
+                !order.buyToken
+                || !order.sellToken
+            ){
+                throw new Error("Please provide either the market or the buyToken and sellToken parameters")
+            }
+
+            // also support token symbols instead of contracts
+            let buyToken  = this.listedPacket.tokensByContract[order.buyToken]  || this.listedPacket.tokens[order.buyToken],
+                sellToken = this.listedPacket.tokensByContract[order.sellToken] || this.listedPacket.tokens[order.sellToken]
+
+            if(!buyToken || !sellToken) throw new Error("Unknown token")
+
+            order.sellToken = sellToken.contractAddress
+            order.buyToken  = buyToken.contractAddress
+            
+            // derive the market of the order
+            if(order.market = this.listedPacket.markets[buyToken.symbol  + sellToken.symbol]){
+                order.direction = "buy"
+            }else if(order.market = this.listedPacket.markets[sellToken.symbol + buyToken.symbol]){
+                order.direction = "sell"
+            }else{
+                throw new Error("Unknown Market")
+            }
+        }
+
+        // BigNumberify amount parameter if it exists
+        if(
+            order.amount
+            && typeof(order.amount) === "number"
+        ){
+            order.amount = new BigNumber(order.amount).times(Math.pow(10, this.listedPacket.tokens[order.market.traded].decimals))
+        }
+
+        // accept side parameter instead of direction or derive from positive/negative amount
+        if(!order.direction){
+            if(order.side){
+                order.direction = order.side
+            }else if(order.amount){
+                order.direction = order.amount.gt(0)?"buy":"sell"
+            }
+        }
+        if(order.direction !== "buy" && order.direction !== "sell") throw new Error("Unknown Order Direction")
+        if(order.direction == "buy"  && order.amount.lt(0))         throw new Error("Negative amount for buy order.")
+
+        // make amount positive after direction was set
+        if(order.amount && order.amount.lt(0)) order.amount = order.amount.times(-1)
+
+        if(
+            !order.buyToken
+            || !order.sellToken
+        ){
+            if(order.direction == "buy"){
+                order.buyToken  = this.listedPacket.tokens[order.market.traded].contract
+                order.sellToken = this.listedPacket.tokens[order.market.quote ].contract
+            }else{
+                order.buyToken  = this.listedPacket.tokens[order.market.quote ].contract
+                order.sellToken = this.listedPacket.tokens[order.market.traded].contract
+            }
+        }
+
+        // support rate & amount instead of 
+        if(
+            !order.buyAmount
+            || !order.sellAmount
+        ){
+            if(
+                !order.amount
+                || !order.rate
+            ) throw new Error("Please the amount and rate or buyAmount and sellAmount parameters")
+            
+            if(order.direction == "buy"){
+                order.buyAmount  = order.amount.integerValue(1)
+                order.sellAmount = order.amount.div(Math.pow(10,this.listedPacket.tokens[order.market.traded].decimals)).times(order.rate).times(Math.pow(10,this.listedPacket.tokens[order.market.quote].decimals)).integerValue(1)
+            }else{
+                order.sellAmount = order.amount.integerValue(1)
+                order.buyAmount  = order.amount.div(Math.pow(10,this.listedPacket.tokens[order.market.traded].decimals)).times(order.rate).times(Math.pow(10,this.listedPacket.tokens[order.market.quote].decimals)).integerValue(1)
+            }
+        }
+
+        // sign the order if no signature was provided
+        if(
+            !order.signature
+            && (this.config.account || this.config.delegate)
+        ){
+            order.nonce           = order.nonce           || Date.now()
+            order.contractAddress = order.contractAddress || this.configPacket.contractAddress
+
+            order.hash            = this.utils.hashOrder(order)
+            order.signature       = this.utils.web3.eth.accounts.sign(this.utils.hashOrder(order), this.config.account || this.config.delegate).signature
+            order.signatureFormat = "sign"
+
+            delete order.contractAddress
+            delete order.hash
+        }
+
         order.buyAmount  = order.buyAmount.toString(10)
         order.sellAmount = order.sellAmount.toString(10)
+        order.type       = order.type || "limit"
+        order.market     = order.market.symbol
+        
+        delete order.amount
+        delete order.direction
+        delete order.side
+        delete order.rate
+
         this.methods.placeOrder(order, callback)
     }
 }
