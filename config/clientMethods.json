@@ -154,9 +154,6 @@
         }
     },
     "placeOrder" : {
-        "nonce":{
-            "type" : "uint"
-        },
         "cid":{
             "type"     : "uint",
             "optional" : true
@@ -172,14 +169,20 @@
             "type"   : "hexString",
             "length" : 42
         },
+        
         "buyAmount":{
             "type" : "uintString"
         },
         "sellAmount":{
             "type" : "uintString"
         },
-        "type":{
-            "type" : "string"
+        "rebateToken": {
+            "type": "string",
+            "optional": true
+        },
+
+        "nonce":{
+            "type" : "uint"
         },
         "signature":{
             "type"   : "hexString",
@@ -188,10 +191,29 @@
         "signatureFormat":{
             "type" : "string"
         },
+
         "hidden":{
             "type"     : "bool",
             "optional" : true
         },
+        "postOnly": {
+            "type": "bool",
+            "optional": true
+        },
+        "immediateOrCancel": {
+            "type": "bool",
+            "optional": true
+        },
+        "fillOrKill": {
+            "type": "bool",
+            "optional": true
+        },
+
+        "stopRate":{
+            "type"     : "string",
+            "optional" : true
+        },
+
         "peggedTo":{
             "type"     : "string",
             "optional" : true
@@ -200,6 +222,7 @@
             "type"     : "string",
             "optional" : true
         },
+        
         "buyBookAmount":{
             "type"     : "uintString",
             "optional" : true
@@ -236,6 +259,10 @@
         },
         "hidden":{
             "type"     : "bool",
+            "optional" : true
+        },
+        "stopRate":{
+            "type"     : "string",
             "optional" : true
         },
         "peggedTo":{
@@ -375,5 +402,6 @@
             "type"      : "string",
             "maxLength" : 30
         }
-    }
+    },
+    "ping" : {}
 }

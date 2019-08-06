@@ -249,7 +249,7 @@ module.exports = class DexBlue{
             this.methods.getListed(() => {
                 this.placeOrder(order, callback)
             })
-            return
+            return // TODO promise
         }
 
         // check the market parameter, if it exists
@@ -355,7 +355,6 @@ module.exports = class DexBlue{
 
         order.buyAmount  = order.buyAmount.toString(10)
         order.sellAmount = order.sellAmount.toString(10)
-        order.type       = order.type || "limit"
         order.market     = order.market.symbol
         
         delete order.amount
@@ -363,6 +362,8 @@ module.exports = class DexBlue{
         delete order.side
         delete order.rate
 
+        console.log("place")
+        console.log(order)
         this.methods.placeOrder(order, callback)
     }
 }
