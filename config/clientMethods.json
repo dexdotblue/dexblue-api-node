@@ -181,8 +181,13 @@
             "optional": true
         },
 
-        "nonce":{
-            "type" : "uint"
+        "expiry": {
+            "type"     : "uint",
+            "maxValue" : 9999999999
+        },
+        "nonce": {
+            "type"     : "uint",
+            "maxValue" : 9999999999999
         },
         "signature":{
             "type"   : "hexString",
@@ -207,6 +212,11 @@
         "fillOrKill": {
             "type": "bool",
             "optional": true
+        },                  
+        "timeInForce": {
+            "type"     : "uint",
+            "optional" : true,
+            "maxValue" : 9999999999
         },
 
         "stopRate":{
@@ -268,6 +278,11 @@
         "peggedTo":{
             "type"     : "string",
             "optional" : true
+        },                    
+        "timeInForce": {
+            "type"     : "uint",
+            "optional" : true,
+            "maxValue" : 9999999999
         },
         "peggedRate":{
             "type"     : "string",

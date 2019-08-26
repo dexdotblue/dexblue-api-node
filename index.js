@@ -1,14 +1,17 @@
 // load modules
-let fs        = require('fs'),
+let path      = require("path"),
+    fs        = require('fs'),
     WebSocket = require('ws'),
     Web3      = require('web3'),
     BigNumber = require('bignumber.js')
     
 
 // load config files
-let config         = JSON.parse(fs.readFileSync('config/config.json')),
-    clientMethods  = JSON.parse(fs.readFileSync('config/clientMethods.json')),
-    serverEvents   = JSON.parse(fs.readFileSync('config/serverEvents.json')),
+let config         = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'config/config.json'))),
+    clientMethods  = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'config/clientMethods.json'))),
+    serverPackages = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'config/serverEvents.json'))),
+    serverEvents   = serverPackages.events,
+    serverStructs  = serverPackages.structs,
     serverEventIds = {}
 
 // create server event id mapping
@@ -105,6 +108,8 @@ module.exports = class DexBlue{
 
         this.ws.on('message', function(body, flags){
             self.callEventListers("wsMessage", arguments);
+
+            console.log("<", body)
 
             var msgs = JSON.parse(body)
 
@@ -234,6 +239,8 @@ module.exports = class DexBlue{
             nonce     : nonce,
             signature : this.utils.web3.eth.accounts.sign(nonce.toString(), privateKey).signature
         }, console.log)
+
+        this.config.account = privateKey
     }
     authenticateDelegate(privateKey){
         let nonce = Date.now()
@@ -242,6 +249,8 @@ module.exports = class DexBlue{
             nonce     : nonce,
             signature : this.utils.web3.eth.accounts.sign(nonce.toString(), privateKey).signature
         }, console.log)
+
+        this.config.delegate = privateKey
     }
     placeOrder(order, callback){
         // fetch listed packet, if it was not requested already
@@ -286,7 +295,10 @@ module.exports = class DexBlue{
         // BigNumberify amount parameter if it exists
         if(
             order.amount
-            && typeof(order.amount) === "number"
+            && (
+                typeof(order.amount) === "number"
+                || typeof(order.amount) === "string"
+            )
         ){
             order.amount = new BigNumber(order.amount).times(Math.pow(10, this.listedPacket.tokens[order.market.traded].decimals))
         }
@@ -343,6 +355,7 @@ module.exports = class DexBlue{
             && (this.config.account || this.config.delegate)
         ){
             order.nonce           = order.nonce           || Date.now()
+            order.expiry          = order.expiry          || 1746144325 // 02.05.2025 02:05:25
             order.contractAddress = order.contractAddress || this.configPacket.contractAddress
 
             order.hash            = this.utils.hashOrder(order)
@@ -362,9 +375,10 @@ module.exports = class DexBlue{
         delete order.side
         delete order.rate
 
-        console.log("place")
-        console.log(order)
         this.methods.placeOrder(order, callback)
+    }
+    disconnect(){
+        this.ws.close()
     }
 }
 
@@ -504,6 +518,14 @@ class DexBlueUtils{
                     throw "invalid format spec"
                 }
                 break;
+            case "struct":
+                if(serverStructs[format.struct]){
+                    let struct = serverStructs[format.struct]
+                    parsed = this.parseServerPacket(struct, msg)
+                }else{
+                    throw "invalid format spec"
+                }
+                break;
             default:
                 throw "invalid format spec"
                 break;
@@ -513,12 +535,13 @@ class DexBlueUtils{
     }
     hashOrder(order){
         return this.web3.utils.soliditySha3(
-            {type: 'address', value: order.buyToken.toLowerCase()},
             {type: 'address', value: order.sellToken.toLowerCase()},
-            {type: 'uint256', value: order.buyAmount.toString(10)},
-            {type: 'uint256', value: order.sellAmount.toString(10)},
+            {type: 'uint128', value: order.sellAmount.toString(10)},
+            {type: 'address', value: order.buyToken.toLowerCase()},
+            {type: 'uint128', value: order.buyAmount.toString(10)},
+            {type: 'uint32',  value: order.expiry},
             {type: 'uint64',  value: order.nonce},
-            {type: 'address', value: order.contractAddress.toLowerCase()}
+            {type: 'address', value: (order.contractAddress || self.config.contractAddress).toLowerCase()}
         )
     }
 }
