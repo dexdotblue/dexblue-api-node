@@ -34,7 +34,6 @@
 
     },
     "logoff" : {},
-    "getAcceptedFee" : {},
     "getListed" : {},
     "getActiveOrderSnapshot" : {},
     "getHistoricalOrders" : {
@@ -154,10 +153,6 @@
         }
     },
     "placeOrder" : {
-        "cid":{
-            "type"     : "uint",
-            "optional" : true
-        },
         "market":{
             "type" : "string"
         },
@@ -176,10 +171,6 @@
         "sellAmount":{
             "type" : "uintString"
         },
-        "rebateToken": {
-            "type": "string",
-            "optional": true
-        },
 
         "expiry": {
             "type"     : "uint",
@@ -197,10 +188,21 @@
             "type" : "string"
         },
 
+        "cid":{
+            "type"     : "uint",
+            "optional" : true
+        },
+
+        "rebateToken": {
+            "type": "string",
+            "optional": true
+        },
+        
         "hidden":{
             "type"     : "bool",
             "optional" : true
         },
+
         "postOnly": {
             "type": "bool",
             "optional": true
@@ -212,7 +214,8 @@
         "fillOrKill": {
             "type": "bool",
             "optional": true
-        },                  
+        },        
+
         "timeInForce": {
             "type"     : "uint",
             "optional" : true,
@@ -274,16 +277,16 @@
         "stopRate":{
             "type"     : "string",
             "optional" : true
-        },
-        "peggedTo":{
-            "type"     : "string",
-            "optional" : true
-        },                    
+        },                 
         "timeInForce": {
             "type"     : "uint",
             "optional" : true,
             "maxValue" : 9999999999
         },
+        "peggedTo":{
+            "type"     : "string",
+            "optional" : true
+        },   
         "peggedRate":{
             "type"     : "string",
             "optional" : true

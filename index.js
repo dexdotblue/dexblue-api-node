@@ -109,8 +109,6 @@ module.exports = class DexBlue{
         this.ws.on('message', function(body, flags){
             self.callEventListers("wsMessage", arguments);
 
-            console.log("<", body)
-
             var msgs = JSON.parse(body)
 
             for(var i in msgs){
@@ -232,23 +230,25 @@ module.exports = class DexBlue{
     send(message){
         this.ws.send(JSON.stringify(message))
     }
-    authenticate(privateKey){
+    authenticate(privateKey, callback){
         let nonce = Date.now()
+
         this.methods.authenticate({
             message   : nonce.toString(),
             nonce     : nonce,
             signature : this.utils.web3.eth.accounts.sign(nonce.toString(), privateKey).signature
-        }, console.log)
+        }, callback)
 
         this.config.account = privateKey
     }
-    authenticateDelegate(privateKey){
+    authenticateDelegate(privateKey, callback){
         let nonce = Date.now()
+
         this.methods.authenticateDelegate({
             message   : nonce.toString(),
             nonce     : nonce,
             signature : this.utils.web3.eth.accounts.sign(nonce.toString(), privateKey).signature
-        }, console.log)
+        }, callback)
 
         this.config.delegate = privateKey
     }
@@ -258,7 +258,6 @@ module.exports = class DexBlue{
             this.methods.getListed(() => {
                 this.placeOrder(order, callback)
             })
-            return // TODO promise
         }
 
         // check the market parameter, if it exists
