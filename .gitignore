@@ -1,0 +1,9 @@
+.vscode
+node_modules
+Rubbish
+.directory
+.env
+npm-debug.log
+desktop.ini
+test.js
+example.js

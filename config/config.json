@@ -1,0 +1,11 @@
+{
+    "defaultEndpoint"     : "wss://api.dex.blue/ws",
+    "defaultNetwork"      : "mainnet",
+    "defaultWeb3Provider" : "https://mainnet.infura.io/",
+    "chainIds"            : {
+        "mainnet" : 1,
+        "ropsten" : 3,
+        "rinkeby" : 4,
+        "goerli"  : 5
+    }
+}

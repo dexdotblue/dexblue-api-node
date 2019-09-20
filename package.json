@@ -1,0 +1,32 @@
+{
+  "name": "dexblue-api-node",
+  "version": "v0.1.0-beta1",
+  "description": "dex.blue API wrapper for node.js",
+  "homepage": "https://github.com/dexdotblue/dexblue-api-node",
+  "bugs": {
+    "url": "https://github.com/dexdotblue/dexblue-api-node/issues",
+    "email": "tech@dex.blue"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dexdotblue/dexblue-api-node.git"
+  },
+  "keywords": [
+    "dex.blue",
+    "dex",
+    "API",
+    "ethereum",
+    "exchange",
+    "tokens"
+  ],
+  "author": "dex.blue",
+  "license": "MIT",
+  "dependencies": {
+    "bignumber.js": "^8.1.1",
+    "web3": "^1.0.0-beta.52"
+  }
+}
