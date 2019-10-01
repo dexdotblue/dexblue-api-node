@@ -170,7 +170,12 @@ class DexBlueWS{
                         if(event == "error"){
                             handler.reject(new Error(msg))
                         }else{
-                            if(chan != "0") parsed.market = chan
+                            if(
+                                chan != "0" 
+                                && typeof(parsed) == "Object" 
+                                && !Array.isArray(parsed)
+                            ) parsed.market = chan
+
                             handler.resolve({
                                 chan    : chan,
                                 event   : event,
