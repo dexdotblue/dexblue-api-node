@@ -5,6 +5,7 @@ A Node.JS reference implementation of the dex.blue API.
 Full websocket API documentation at [docs.dex.blue](https://docs.dex.blue).
 
 ## Installation
+
 ```bash
   npm i dexblue-api-node
 ```
@@ -20,7 +21,6 @@ For the most straightforward integration, which does not require you to directly
 If you want to handle deposits and withdrawals from your bot, please check out [this page](https://docs.dex.blue/contract/) of our documentation.
 
 ## Usage
-
 
 The Private key to sign authentication and order messages has to be passed to the contructor:
 
@@ -57,7 +57,8 @@ Additionally the library offers some helper functions to deal with all of the ha
 
 You can subscribe to any server and websocket events using the following functions:
 
-Events: 
+Events:
+
 - Market Events:
   - `book20d5` ... `book20d1` Orderbook with a depth of 20 with 5 ... 1 decimal precision (for the rate)
   - `book100d5` ... `book100d1` Orderbook with a depth of 10 with 5 ... 1 decimal precision (for the rate)
@@ -75,8 +76,6 @@ Events:
   - `wsClose` websocket conn is closed
   - `packet` called for single packets, the server might return an array of packets in a single websocket message
 
-
-
 ```javascript
 // subscribe to events
 API.methods.subscribe({
@@ -92,8 +91,7 @@ API.on('event', function(chan, packet, parsed){
 
 ## Examples
 
-
-### Placing an Order.
+### Placing an Order
 
 For all possible parameters, please refer to the [websocket API documentation](https://docs.dex.blue/websocket/#placeorder).
 
@@ -140,7 +138,6 @@ API.on('auth', function(chan, packet, session){
 
 ```
 
-
 ## Error and Exception Handling
 
 In the following snippet you find all (protocoll related) error events you should handle:
@@ -160,6 +157,7 @@ API.on('wsClose', (reason) => {
 ```
 
 ## Message-Level Debugging
+
 ```javascript
 API.on('wsSend', (message) => {
     // Log all outgoing messages
