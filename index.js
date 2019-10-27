@@ -121,9 +121,9 @@ class DexBlueWS{
         };
 
         this.ws.onmessage = function(body){
-            self.callEventListers("wsMessage", body);
+            self.callEventListers("wsMessage", body.data);
 
-            var msgs = JSON.parse(body);
+            var msgs = JSON.parse(body.data);
 
             for(var i in msgs){
 
