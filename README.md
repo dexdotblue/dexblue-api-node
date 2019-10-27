@@ -32,7 +32,7 @@ The Private key to sign authentication and order messages has to be passed to th
         // Authenticate an account
         account  : "YOUR_ACCOUNT_PRIVATE_KEY",
         // ...or a delegate
-        delegate : "YOUR_DELEGATE_PRIVATE_KEY" 
+        delegate : "YOUR_DELEGATE_PRIVATE_KEY"
     })
 
     API.on("wsOpen", ()=>{
