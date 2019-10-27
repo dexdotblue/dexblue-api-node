@@ -1,3 +1,4 @@
+"use strict";
 // Load modules
 let path      = require("path"),
     fs        = require("fs"),
