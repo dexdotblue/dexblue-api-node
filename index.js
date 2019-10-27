@@ -1,16 +1,14 @@
 "use strict";
 // Load modules
-let path      = require("path"),
-    fs        = require("fs"),
-    WebSocket = require("ws"),
+let WebSocket = require("ws"),
     Web3      = require("web3"),
     BigNumber = require("bignumber.js");
     
 
 // Load config files
-let config         = JSON.parse(fs.readFileSync(path.resolve(__dirname, "config/config.json"))),
-    clientMethods  = JSON.parse(fs.readFileSync(path.resolve(__dirname, "config/clientMethods.json"))),
-    serverPackages = JSON.parse(fs.readFileSync(path.resolve(__dirname, "config/serverEvents.json"))),
+let config         = require("./config/config.json"),
+    clientMethods  = require("./config/clientMethods.json"),
+    serverPackages = require("./config/serverEvents.json"),
     serverEvents   = serverPackages.events,
     serverStructs  = serverPackages.structs,
     serverEventIds = {};
