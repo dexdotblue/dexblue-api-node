@@ -1,6 +1,6 @@
 "use strict";
 // Load modules
-let WebSocket = require("ws"),
+let WebSocket = require("isomorphic-ws"),
     Web3      = require("web3"),
     BigNumber = require("bignumber.js");
     
