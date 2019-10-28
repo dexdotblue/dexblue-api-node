@@ -27,6 +27,10 @@
   "license": "MIT",
   "dependencies": {
     "bignumber.js": "^8.1.1",
+    "isomorphic-ws": "^4.0.1",
     "web3": "^1.0.0-beta.52"
+  },
+  "devDependencies": {
+    "eslint": "^6.6.0"
   }
 }
