@@ -1,6 +1,6 @@
 "use strict";
 // Load modules
-let WebSocket = require("ws"),
+let WebSocket = require("isomorphic-ws"),
     Web3      = require("web3"),
     BigNumber = require("bignumber.js");
     
@@ -86,7 +86,7 @@ class DexBlueWS{
 
         this.ws = new WebSocket(this.config.endpoint);
 
-        this.ws.on("open", function(){
+        this.ws.onopen = function(){
             let openArgs = arguments;
             // Automatically authenticate, if a private key was provided at startup
             if(
@@ -108,20 +108,22 @@ class DexBlueWS{
             }else{
                 self.callEventListers("wsOpen", openArgs);
             }
-        });
-        this.ws.on("error", function(error){
+        };
+
+        this.ws.onerror = function(error){
             self.callEventListers("wsError", error);
             if(Object.keys(self.callbacks.wsError).length == 0) throw error;
-        });
-        this.ws.on("close", function(error){
+        };
+
+        this.ws.onclose = function(error){
             self.callEventListers("wsClose", error);
             if(Object.keys(self.callbacks.wsClose).length == 0) throw error;
-        });
+        };
 
-        this.ws.on("message", function(body){
-            self.callEventListers("wsMessage", body);
+        this.ws.onmessage = function(body){
+            self.callEventListers("wsMessage", body.data);
 
-            var msgs = JSON.parse(body);
+            var msgs = JSON.parse(body.data);
 
             for(var i in msgs){
 
@@ -192,7 +194,7 @@ class DexBlueWS{
                 // Call packet listeners
                 self.callEventListers("packet", [packet]);
             }
-        });
+        };
     }
     // Add an event lister to a server event
     on(event, callback){
