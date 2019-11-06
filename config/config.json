@@ -1,5 +1,5 @@
 {
-    "defaultEndpoint"     : "wss://api.dex.blue/ws",
+    "defaultEndpoint"     : "wss://api.dex.blue/ws/v1",
     "defaultNetwork"      : "mainnet",
     "defaultWeb3Provider" : "https://mainnet.infura.io/",
     "chainIds"            : {
