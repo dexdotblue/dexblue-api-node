@@ -649,7 +649,7 @@
             "id"   : "bd",
             "type" : "object",
             "keys" : {
-                "trades" : {
+                "bars" : {
                     "type" : "array",
                     "elements" : {
                         "type"   : "array",
