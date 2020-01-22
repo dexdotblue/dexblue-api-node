@@ -581,6 +581,70 @@
                 }
             ]
         },
+        "indexTicker" : {
+            "id"     : "iti",
+            "type"   : "array",
+            "fields" : [
+                {
+                    "name" : "rate",
+                    "type" : "floatString"
+                },
+                {
+                    "name" : "change24h",
+                    "type" : "floatString"
+                },
+                {
+                    "name" : "volumeTraded24h",
+                    "type" : "floatString"
+                },
+                {
+                    "name" : "volumeQuote24h",
+                    "type" : "floatString"
+                },
+                {
+                    "name" : "high24h",
+                    "type" : "floatString"
+                },
+                {
+                    "name" : "low24h",
+                    "type" : "floatString"
+                }
+            ]
+        },
+        "bar" : {
+            "id"   : "bar",
+            "type"   : "array",
+            "fields" : [
+                {
+                    "name" : "timestamp",
+                    "type" : "float"
+                },
+                {
+                    "name" : "open",
+                    "type" : "float"
+                },
+                {
+                    "name" : "high",
+                    "type" : "float"
+                },
+                {
+                    "name" : "low",
+                    "type" : "float"
+                },
+                {
+                    "name" : "close",
+                    "type" : "float"
+                },
+                {
+                    "name" : "priveVolume",
+                    "type" : "float"
+                },
+                {
+                    "name" : "quoteVolume",
+                    "type" : "float"
+                }
+            ]
+        },
         "barData" : {
             "id"   : "bd",
             "type" : "object",
@@ -611,7 +675,11 @@
                                 "type" : "float"
                             },
                             {
-                                "name" : "volume",
+                                "name" : "priveVolume",
+                                "type" : "float"
+                            },
+                            {
+                                "name" : "quoteVolume",
                                 "type" : "float"
                             }
                         ]
