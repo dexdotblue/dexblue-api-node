@@ -660,27 +660,33 @@
                             },
                             {
                                 "name" : "open",
-                                "type" : "float"
+                                "type" : "float",
+                                "optional" : true
                             },
                             {
                                 "name" : "high",
-                                "type" : "float"
+                                "type" : "float",
+                                "optional" : true
                             },
                             {
                                 "name" : "low",
-                                "type" : "float"
+                                "type" : "float",
+                                "optional" : true
                             },
                             {
                                 "name" : "close",
-                                "type" : "float"
+                                "type" : "float",
+                                "optional" : true
                             },
                             {
                                 "name" : "priveVolume",
-                                "type" : "float"
+                                "type" : "float",
+                                "optional" : true
                             },
                             {
                                 "name" : "quoteVolume",
-                                "type" : "float"
+                                "type" : "float",
+                                "optional" : true
                             }
                         ]
                     }
