@@ -999,5 +999,80 @@
             "id"     : "p",
             "type"   : "string"
         }
+    },
+    "tokenInfo" : {
+        "id"   : "toi",
+        "type" : "object",
+        "keys" : {
+            "name" : {
+                "type" : "string"
+            },
+            "symbol" : {
+                "type" : "string"
+            },
+            "contract" : {
+                "type" : "string"
+            },
+            "decimals" : {
+                "type" : "uint"
+            },
+            "minOrderAmount" : {
+                "type" : "uintString"
+            },
+            "minOrderRemaining" : {
+                "type" : "uintString"
+            },
+            "supply" : {
+                "type" : "floatString"
+            },
+            "description" : {
+                "type" : "string"
+            },
+            "links" : {
+                "type" : "object",
+                "keys" : {
+                    "website" : {
+                        "type" : "string",
+                        "optional" : true
+                    },
+                    "whitepaper" : {
+                        "type" : "string",
+                        "optional" : true
+                    },
+                    "github" : {
+                        "type" : "string",
+                        "optional" : true
+                    },
+                    "twitter" : {
+                        "type" : "string",
+                        "optional" : true
+                    },
+                    "medium" : {
+                        "type" : "string",
+                        "optional" : true
+                    },
+                    "reddit" : {
+                        "type" : "string",
+                        "optional" : true
+                    },
+                    "stackexchange" : {
+                        "type" : "string",
+                        "optional" : true
+                    },
+                    "discord" : {
+                        "type" : "string",
+                        "optional" : true
+                    },
+                    "telegram" : {
+                        "type" : "string",
+                        "optional" : true
+                    },
+                    "explorer" : {
+                        "type" : "string",
+                        "optional" : true
+                    }
+                }
+            }
+        }
     }
 }
