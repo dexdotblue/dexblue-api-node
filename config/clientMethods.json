@@ -321,6 +321,10 @@
         }
     },
     "getBarData" : {
+        "source": {
+            "type": "string",
+            "optional": true
+        },
         "from":{
             "type" : "uint"
         },
