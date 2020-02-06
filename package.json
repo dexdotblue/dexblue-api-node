@@ -1,6 +1,6 @@
 {
   "name": "dexblue-api-node",
-  "version": "0.1.0-beta.5",
+  "version": "0.2.0-0",
   "description": "dex.blue API wrapper for node.js",
   "homepage": "https://github.com/dexdotblue/dexblue-api-node",
   "bugs": {
