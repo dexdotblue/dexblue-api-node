@@ -54,6 +54,10 @@
     "getTicker": {
         "market": {
             "type": "string"
+        },
+        "source": {
+            "type": "string",
+            "optional": true
         }
     },
     "getActiveOrderSnapshot" : {},
