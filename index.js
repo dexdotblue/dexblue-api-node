@@ -35,6 +35,21 @@ class DexBlueWS{
             noAutoAuth   : parameters.noAutoAuth || false
         };
 
+        // add customServerEvents
+        if(parameters.customServerEvents){
+            for(let i in parameters.customServerEvents){
+                let event = serverEvents[i] = parameters.customServerEvents[i];
+                serverEventIds[event.id] = i;
+            }
+        }
+
+        // add customClientMethods
+        if(parameters.customClientMethods){
+            for(let i in parameters.customClientMethods){
+                clientMethods[i] = parameters.customClientMethods[i];
+            }
+        }
+
         this.chainId = parameters.chainId || config.chainIds[this.config.network];
 
         // Load utils
