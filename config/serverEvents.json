@@ -636,7 +636,7 @@
                     "type" : "float"
                 },
                 {
-                    "name" : "priveVolume",
+                    "name" : "tradedVolume",
                     "type" : "float"
                 },
                 {
