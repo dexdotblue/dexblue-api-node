@@ -679,7 +679,7 @@
                                 "optional" : true
                             },
                             {
-                                "name" : "priveVolume",
+                                "name" : "tradedVolume",
                                 "type" : "float",
                                 "optional" : true
                             },
