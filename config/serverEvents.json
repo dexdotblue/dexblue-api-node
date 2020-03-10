@@ -611,6 +611,36 @@
                 }
             ]
         },
+        "mixedTicker" : {
+            "id"     : "mti",
+            "type"   : "array",
+            "fields" : [
+                {
+                    "name" : "rate",
+                    "type" : "floatString"
+                },
+                {
+                    "name" : "change24h",
+                    "type" : "floatString"
+                },
+                {
+                    "name" : "volumeTraded24h",
+                    "type" : "floatString"
+                },
+                {
+                    "name" : "volumeQuote24h",
+                    "type" : "floatString"
+                },
+                {
+                    "name" : "high24h",
+                    "type" : "floatString"
+                },
+                {
+                    "name" : "low24h",
+                    "type" : "floatString"
+                }
+            ]
+        },
         "bar" : {
             "id"   : "bar",
             "type"   : "array",
